@@ -27,3 +27,9 @@ jobs:
         uses: helm/chart-releaser-action@v1.7.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Copy README.md
+        uses: tuftsrt/copy-to-branch@v1
+        with:
+          destination-branch: gh-pages
+          copy: |
+            README.md

@@ -122,7 +122,7 @@ secrets:
 {% raw %}
 | Expression                      | Description                             |
 |---------------------------------|-----------------------------------------|
-| `{{ randAlphaNum 32 }}"`        | Random 32-character alphanumeric string |
+| `{{ randAlphaNum 32 }}`         | Random 32-character alphanumeric string |
 | `{{ randAlpha 16 }}`            | Random 16-character alphabetic string   |
 | `{{ genPrivateKey "rsa" }}`     | RSA private key (PEM)                   |
 | `{{ genPrivateKey "ec" }}`      | EC private key (PEM, faster than RSA)   |
