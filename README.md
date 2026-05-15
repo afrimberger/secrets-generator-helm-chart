@@ -30,6 +30,39 @@ This means secrets are stable across upgrades. Values generated on first install
 
 ## Installation
 
+### From the Helm Repository (GitHub Pages)
+
+```bash
+helm repo add secrets-generator https://afrimberger.github.io/secrets-generator-helm-chart
+helm repo update
+helm install secrets-generator secrets-generator/secrets-generator -n <namespace>
+```
+
+To upgrade:
+
+```bash
+helm upgrade secrets-generator secrets-generator/secrets-generator -n <namespace>
+```
+
+### As a Dependency in Another Chart
+
+Add to your `Chart.yaml`:
+
+```yaml
+dependencies:
+  - name: secrets-generator
+    version: "0.1.0"
+    repository: "https://afrimberger.github.io/secrets-generator-helm-chart"
+```
+
+Then run:
+
+```bash
+helm dependency update
+```
+
+### From Source
+
 ```bash
 helm install secrets-generator . -n <namespace>
 ```
@@ -58,6 +91,7 @@ secrets:
 Values can be either **Helm template expressions** (evaluated at deploy time) or **literal strings** (stored as-is):
 
 ```yaml
+{% raw %}
 secrets:
   # Random password generated on first install
   - name: my-app-credentials
@@ -69,34 +103,38 @@ secrets:
   - name: signing-keys
     data:
       private-key: |
-        {{ genPrivateKey "rsa" }}
+         {{ genPrivateKey "rsa" }}
       ec-key: |
-        {{ genPrivateKey "ec" }}
+         {{ genPrivateKey "ec" }}
 
   # Literal values (stored directly, not generated)
   - name: static-config
     data:
       database-host: "postgres.internal"
       port: "5432"
+{% endraw %}
 ```
 
 ### Available Helm Template Functions
 
 **Any Helm template function can be used in secret values**, some examples:
 
+{% raw %}
 | Expression                      | Description                             |
 |---------------------------------|-----------------------------------------|
-| `{{ randAlphaNum 32 }}`         | Random 32-character alphanumeric string |
+| `{{ randAlphaNum 32 }}"`        | Random 32-character alphanumeric string |
 | `{{ randAlpha 16 }}`            | Random 16-character alphabetic string   |
 | `{{ genPrivateKey "rsa" }}`     | RSA private key (PEM)                   |
 | `{{ genPrivateKey "ec" }}`      | EC private key (PEM, faster than RSA)   |
 | `{{ genPrivateKey "ed25519" }}` | Ed25519 private key (PEM)               |
 | `{{ randBytes 32 \| b64enc }}`  | 32 random bytes, base64-encoded         |
+{% endraw %}
 
 ## Example
 
 ```yaml
 # values.yaml
+{% raw %}
 secrets:
   - name: app-secrets
     data:
@@ -113,6 +151,7 @@ secrets:
     data:
       API_ENDPOINT: "https://api.example.com"
       API_VERSION: "v2"
+{% endraw %}
 ```
 
 ```bash
