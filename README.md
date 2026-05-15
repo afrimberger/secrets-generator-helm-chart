@@ -48,7 +48,7 @@ serviceAccount:
   name: secrets-generator
 
 secrets:
-  - secretName: <kubernetes-secret-name>
+  - name: <kubernetes-secret-name>
     data:
       <key>: <value-or-helm-expression>
 ```
@@ -60,13 +60,13 @@ Values can be either **Helm template expressions** (evaluated at deploy time) or
 ```yaml
 secrets:
   # Random password generated on first install
-  - secretName: my-app-credentials
+  - name: my-app-credentials
     data:
       password: "{{ randAlphaNum 32 }}"
       api-key: "{{ randAlphaNum 64 }}"
 
   # RSA private keys
-  - secretName: signing-keys
+  - name: signing-keys
     data:
       private-key: |
         {{ genPrivateKey "rsa" }}
@@ -74,7 +74,7 @@ secrets:
         {{ genPrivateKey "ec" }}
 
   # Literal values (stored directly, not generated)
-  - secretName: static-config
+  - name: static-config
     data:
       database-host: "postgres.internal"
       port: "5432"
@@ -98,18 +98,18 @@ secrets:
 ```yaml
 # values.yaml
 secrets:
-  - secretName: app-secrets
+  - name: app-secrets
     data:
       JWT_SECRET: "{{ randAlphaNum 64 }}"
       SESSION_KEY: "{{ randAlphaNum 32 }}"
       DB_PASSWORD: "{{ randAlphaNum 24 }}"
 
-  - secretName: tls-signing
+  - name: tls-signing
     data:
       SIGNING_KEY: |
         {{ genPrivateKey "ec" }}
 
-  - secretName: external-api
+  - name: external-api
     data:
       API_ENDPOINT: "https://api.example.com"
       API_VERSION: "v2"

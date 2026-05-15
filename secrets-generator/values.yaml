@@ -7,15 +7,15 @@ serviceAccount:
   name: secrets-generator
 
 # set to true if this is the only Helm Chart in the ArgoCD application.
-# It creates a dummy configMap so that there is one resource to sync
+# It creates a dummy configMap so that there is one resource to sync.
 createDummyResource: false
 
 
 secrets: []
-#  - secretName: my-example-password
+#  - name: my-example-password
 #    data:
 #      password: "{{ randAlphaNum 32 }}"
-#  - secretName: my-private-key
+#  - name: my-private-key
 #    data:
 #      SIGNING_KEY: |
 #        {{ genPrivateKey "ec" }}

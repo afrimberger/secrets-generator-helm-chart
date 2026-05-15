@@ -26,7 +26,7 @@ data:
     apiVersion: v1
     kind: Secret
     metadata:
-      name: "{{ .secretName }}"
+      name: "{{ .name }}"
     type: Opaque
     data:
       {{- range $key, $value := .data }}
