@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  secrets-generator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-05-15T17:10:34.027282425Z"
+    description: A Helm chart for generating idempotent secrets at deploy time. With
+      ArgoCD support.
+    digest: 0dec40609dcc2d0c9c2534cb6a6855e18c91bc3d544abb01d8ad20bb76099108
+    name: secrets-generator
+    type: application
+    urls:
+    - https://github.com/afrimberger/secrets-generator-helm-chart/releases/download/secrets-generator-0.1.0/secrets-generator-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-05-15T17:10:34.027286804Z"
