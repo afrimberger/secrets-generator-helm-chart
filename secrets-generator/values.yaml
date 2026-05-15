@@ -1,0 +1,16 @@
+image:
+  repository: dtzar/helm-kubectl
+  tag: "3.14"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  name: secrets-generator
+
+secrets: []
+#  - secretName: my-example-password
+#    data:
+#      password: "{{ randAlphaNum 32 }}"
+#  - secretName: my-private-key
+#    data:
+#      SIGNING_KEY: |
+#        {{ genPrivateKey "ec" }}
