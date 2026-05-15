@@ -1,0 +1,12 @@
+{{ if .Values.createDummyResource }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-standalone
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: secrets-generator
+    app.kubernetes.io/instance: {{ .Release.Name }}
+data:
+  standalone: "dummy for ArgoCD to have one sync resource"
+{{ end }}

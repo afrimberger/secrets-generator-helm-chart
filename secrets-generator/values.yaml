@@ -6,6 +6,11 @@ image:
 serviceAccount:
   name: secrets-generator
 
+# set to true if this is the only Helm Chart in the ArgoCD application.
+# It creates a dummy configMap so that there is one resource to sync
+createDummyResource: false
+
+
 secrets: []
 #  - secretName: my-example-password
 #    data:
