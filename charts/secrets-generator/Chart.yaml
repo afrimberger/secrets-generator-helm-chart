@@ -2,5 +2,5 @@ apiVersion: v2
 name: secrets-generator
 description: A Helm chart for generating idempotent secrets at deploy time. With ArgoCD support.
 type: application
-version: 0.1.0
+version: 0.2.0
 appVersion: "1.16.0"

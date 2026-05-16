@@ -24,6 +24,10 @@ spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       restartPolicy: OnFailure
       automountServiceAccountToken: true
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{ toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
         - name: inner-chart
           configMap:
