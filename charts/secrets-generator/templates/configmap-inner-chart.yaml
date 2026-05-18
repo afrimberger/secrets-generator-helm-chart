@@ -19,22 +19,19 @@ data:
     name: secret-values
     version: 0.1.0
     type: application
+  values.yaml: |
+    secrets:
+{{ .Values.secrets | toYaml | indent 6 }}
   secrets.yaml: |
-    {{- $closeBraces := "}}" -}}
-    {{- range .Values.secrets }}
+    {{ "{{" }}- range .Values.secrets {{ "}}" }}
     ---
     apiVersion: v1
     kind: Secret
     metadata:
-      name: "{{ .name }}"
+      name: {{ "{{" }} .name | quote {{ "}}" }}
     type: Opaque
     data:
-      {{- range $key, $value := .data }}
-      {{- $trimmed := trim $value }}
-      {{- if and (hasPrefix "{{" $trimmed) (hasSuffix "}}" $trimmed) }}
-      {{ $key }}: {{ printf "%s | b64enc %s" (trimSuffix $closeBraces $trimmed) $closeBraces }}
-      {{- else }}
-      {{ $key }}: {{ $trimmed | b64enc }}
-      {{- end }}
-      {{- end }}
-    {{- end }}
+      {{ "{{" }}- range $key, $value := .data {{ "}}" }}
+      {{ "{{" }} $key {{ "}}" }}: {{ "{{" }} tpl $value $ | b64enc {{ "}}" }}
+      {{ "{{" }}- end {{ "}}" }}
+    {{ "{{" }}- end {{ "}}" }}

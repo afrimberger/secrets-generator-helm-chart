@@ -105,7 +105,7 @@ secrets:
       private-key: |
          {{ genPrivateKey "rsa" }}
       ec-key: |
-         {{ genPrivateKey "ec" }}
+         {{ genPrivateKey "ecdsa" }}
 
   # Literal values (stored directly, not generated)
   - name: static-config
@@ -125,7 +125,7 @@ secrets:
 | `{{ randAlphaNum 32 }}`         | Random 32-character alphanumeric string |
 | `{{ randAlpha 16 }}`            | Random 16-character alphabetic string   |
 | `{{ genPrivateKey "rsa" }}`     | RSA private key (PEM)                   |
-| `{{ genPrivateKey "ec" }}`      | EC private key (PEM, faster than RSA)   |
+| `{{ genPrivateKey "ecdsa" }}`   | ECDSA private key (PEM, faster than RSA)|
 | `{{ genPrivateKey "ed25519" }}` | Ed25519 private key (PEM)               |
 | `{{ randBytes 32 \| b64enc }}`  | 32 random bytes, base64-encoded         |
 {% endraw %}
@@ -145,7 +145,7 @@ secrets:
   - name: tls-signing
     data:
       SIGNING_KEY: |
-        {{ genPrivateKey "ec" }}
+        {{ genPrivateKey "ecdsa" }}
 
   - name: external-api
     data:
