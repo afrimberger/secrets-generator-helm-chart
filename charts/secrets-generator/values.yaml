@@ -20,4 +20,4 @@ secrets: []
 #  - name: my-private-key
 #    data:
 #      SIGNING_KEY: |
-#        {{ genPrivateKey "ec" }}
+#        {{ genPrivateKey "ecdsa" }}

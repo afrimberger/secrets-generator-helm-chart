@@ -81,7 +81,7 @@ spec:
               cp /chart-data/secrets.yaml /tmp/inner-chart/templates/secrets.yaml
 
               echo "Executing helm template for rendering secrets"
-              if ! helm template inner /tmp/inner-chart > /tmp/rendered.yaml; then
+              if ! helm template inner /tmp/inner-chart -f /chart-data/values.yaml > /tmp/rendered.yaml; then
                 echo "ERROR: helm template failed"
                 exit 1
               fi
